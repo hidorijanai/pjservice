@@ -21,10 +21,13 @@
         <property name="maxWaitMillis" value="${cp.maxWait}" />
     </bean>
 
-
+    <!-- 本設定はDebug用の設定なので、性能試験および商用環境にリリースする資材には、設定しないようにすること。 -->
     <bean id="dataSource" class="net.sf.log4jdbc.Log4jdbcProxyDataSource">
         <constructor-arg index="0" ref="realDataSource" />
     </bean>
+    <!-- アプリケーションサーバで定義したデータソースを使用する場合 -->
+    <!-- <jee:jndi-lookup id="dataSource" jndi-name="jdbc/dataSource"></jee:jndi-lookup> -->
+
     <!--
     <jdbc:initialize-database data-source="dataSource"
         ignore-failures="ALL">
