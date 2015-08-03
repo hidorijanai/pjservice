@@ -129,7 +129,20 @@
 <!--                 <version>${ojdbc.version}</version> -->
 <!--             </dependency> -->
             <!-- == End Database == -->
-
+            <!-- == Begin PdfDownload == -->
+            <dependency>
+                <groupId>com.lowagie</groupId>
+                <artifactId>itext</artifactId>
+                <version>${com.lowagie.itext.version}</version>
+            </dependency>
+            <!-- == End PdfDownload == -->
+            <!-- == Begin ExcelDownload == -->
+            <dependency>
+                <groupId>org.apache.poi</groupId>
+                <artifactId>poi</artifactId>
+                <version>${org.apache.poi.poi.version}</version>
+            </dependency>
+            <!-- == End ExcelDownload == -->
             <!-- == Rest Api == -->
             <!--
             <dependency>
@@ -145,6 +158,8 @@
         <java-version>1.7</java-version>
         <org.codehaus.mojo.build-helper-maven-plugi.version>1.9.1</org.codehaus.mojo.build-helper-maven-plugi.version>
         <postgresql.version>9.4-1201-jdbc41</postgresql.version>
+        <com.lowagie.itext.version>2.1.7</com.lowagie.itext.version>
+        <org.apache.poi.poi.version>3.9</org.apache.poi.poi.version>
         <ojdbc.version>12.1.0.2</ojdbc.version>
     </properties>
   <modules>

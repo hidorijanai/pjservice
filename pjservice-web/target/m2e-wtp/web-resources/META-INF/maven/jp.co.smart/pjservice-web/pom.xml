@@ -78,7 +78,18 @@
             <type>pom</type>
         </dependency>
         <!-- == End TERASOLUNA == -->
-
+        <!-- == Begin PdfDownload == -->
+        <dependency>
+             <groupId>com.lowagie</groupId>
+             <artifactId>itext</artifactId>
+        </dependency>
+        <!-- == End PdfDownload == -->
+        <!-- == Begin ExcelDownload == -->
+        <dependency>
+             <groupId>org.apache.poi</groupId>
+             <artifactId>poi</artifactId>
+        </dependency>
+        <!-- == End ExcelDownload == -->
         <!-- == Begin Tomcat == -->
         <!-- Servlet API 3.0 & JSP API 2.2 -->
         <dependency>
