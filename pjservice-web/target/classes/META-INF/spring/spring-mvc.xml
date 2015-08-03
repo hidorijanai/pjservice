@@ -95,6 +95,11 @@
         </constructor-arg>
     </bean>
 
+    <!-- ファイルアップロード -->
+    <bean id="multipartResolver"
+        class="org.springframework.web.multipart.support.StandardServletMultipartResolver">
+    </bean>
+
     <!-- Localeをサーバに保存する場合は、SessionLocaleResolverを使用する -->
     <bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
         <property name="defaultLocale" value="ja"/>
@@ -118,6 +123,7 @@
                 <entry key="BusinessException" value="common/error/businessError" />
                 <entry key="InvalidTransactionTokenException" value="common/error/transactionTokenError" />
                 <entry key=".DataAccessException" value="common/error/dataAccessError" />
+                <entry key="MultipartException" value="common/error/fileUploadError" />
             </map>
         </property>
         <property name="statusCodes">
@@ -126,6 +132,7 @@
                 <entry key="common/error/businessError" value="409" />
                 <entry key="common/error/transactionTokenError" value="409" />
                 <entry key="common/error/dataAccessError" value="500" />
+                <entry key="common/error/fileUploadError" value="400" />
             </map>
         </property>
         <property name="defaultErrorView" value="common/error/systemError" />

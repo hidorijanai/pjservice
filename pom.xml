@@ -130,13 +130,21 @@
 <!--             </dependency> -->
             <!-- == End Database == -->
 
+            <!-- == Rest Api == -->
+            <!--
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-oxm</artifactId>
+                <version>${org.springframework-version}</version>
+            </dependency>
+            -->
         </dependencies>
     </dependencyManagement>
     <properties>
         <encoding>UTF-8</encoding>
         <java-version>1.7</java-version>
         <org.codehaus.mojo.build-helper-maven-plugi.version>1.9.1</org.codehaus.mojo.build-helper-maven-plugi.version>
-        <postgresql.version>9.3-1102-jdbc41</postgresql.version>
+        <postgresql.version>9.4-1201-jdbc41</postgresql.version>
         <ojdbc.version>12.1.0.2</ojdbc.version>
     </properties>
   <modules>
