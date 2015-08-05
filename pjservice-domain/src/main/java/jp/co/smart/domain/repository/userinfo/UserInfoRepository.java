@@ -5,9 +5,9 @@
 package jp.co.smart.domain.repository.userinfo;
 
 import jp.co.smart.domain.model.UserInfo;
-import jp.co.smart.domain.repository.BaseCrudRepository;
+import jp.co.smart.domain.repository.BaseRepository;
 
-public interface UserInfoRepository extends BaseCrudRepository<UserInfo, String> {
+public interface UserInfoRepository extends BaseRepository<UserInfo, String> {
 
     public abstract UserInfo findOne(String paramID);
 }

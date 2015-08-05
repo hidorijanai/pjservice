@@ -16,7 +16,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-import jp.co.smart.domain.common.constants.Constants;
+import jp.co.smart.domain.common.constants.DomainConstants;
 import jp.co.smart.domain.model.UserInfo;
 import jp.co.smart.domain.repository.userinfo.UserInfoRepository;
 
@@ -40,7 +40,7 @@ public class BaseUserDetailsService implements UserDetailsService {
 
         String userRole = userInfo.getUserRole();
 
-        if (!Constants.ROLE_USER.equals(userRole) && !Constants.ROLE_ADMIN.equals(userRole)) {
+        if (!DomainConstants.ROLE_USER.equals(userRole) && !DomainConstants.ROLE_ADMIN.equals(userRole)) {
             logger.error("user role: " + userRole + " is not permitted");
             throw new AuthenticationServiceException("user role: " + userRole + " is not permitted");
         }

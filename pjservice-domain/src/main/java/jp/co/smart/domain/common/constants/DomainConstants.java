@@ -4,7 +4,7 @@
  */
 package jp.co.smart.domain.common.constants;
 
-public class Constants {
+public class DomainConstants {
 
 	public static final String ROLE_USER = "ROLE_USER";
 

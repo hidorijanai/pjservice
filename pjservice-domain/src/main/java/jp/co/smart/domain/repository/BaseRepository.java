@@ -8,7 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
-public interface BaseCrudRepository<T, ID extends Serializable> {
+public interface BaseRepository<T, ID extends Serializable> {
 
 //	public abstract T findOneForUpdate(ID paramID);
 //
