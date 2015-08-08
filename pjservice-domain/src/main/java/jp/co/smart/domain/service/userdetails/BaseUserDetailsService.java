@@ -18,7 +18,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import jp.co.smart.domain.common.constants.DomainConstants;
 import jp.co.smart.domain.model.UserInfo;
-import jp.co.smart.domain.repository.userinfo.UserInfoRepository;
+import jp.co.smart.domain.repository.userinfo.UserInfoSharedRepository;
 
 public class BaseUserDetailsService implements UserDetailsService {
 
@@ -26,7 +26,7 @@ public class BaseUserDetailsService implements UserDetailsService {
             .getLogger(BaseUserDetailsService.class);
 
     @Inject
-    UserInfoRepository usreInfoRepository;
+    UserInfoSharedRepository usreInfoRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
