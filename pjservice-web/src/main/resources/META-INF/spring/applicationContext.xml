@@ -41,6 +41,7 @@
                 <entry key="BusinessException" value="e.xx.fw.8001" />
                 <entry key=".DataAccessException" value="e.xx.fw.9002" />
                 <entry key="MultipartException" value="e.xx.fw.6001" />
+                <entry key="InvalidRequestException" value="w.xx.0004" />
                 <!--
                 <entry key="ResourceNotFoundException"              value="e.ex.fw.5001" />
                 <entry key="HttpRequestMethodNotSupportedException" value="e.ex.fw.6001" />

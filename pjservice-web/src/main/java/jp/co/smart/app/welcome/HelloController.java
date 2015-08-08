@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.support.SessionStatus;
 
 /**
  * Handles requests for the application home page.
@@ -36,6 +37,29 @@ public class HelloController {
         model.addAttribute("serverTime", formattedDate);
 
         return "welcome/home";
+    }
+
+    @RequestMapping(value = "save", params = "complete", method = RequestMethod.GET)
+    public String saveComplete(SessionStatus sessionStatus) {
+    	sessionStatus.setComplete();
+    	return "wizard/complete";
+    }
+
+    @RequestMapping(value = "save", params = "cancel", method = RequestMethod.POST)
+    public String saveCancel(SessionStatus sessionStatus) {
+    	sessionStatus.setComplete();
+    	return "redirect:/wizard/menu";
+    }
+
+    @RequestMapping(value = "create",method = RequestMethod.GET)
+    public String initializeWizardForm(SessionStatus sessionStatus) {
+    	sessionStatus.setComplete();
+    	return "redirect:/wizard/create?form1";
+    }
+
+    @RequestMapping(value = "create", params = "form1")
+    public String createForm1() {
+    	return "wizard/form1";
     }
 
 }

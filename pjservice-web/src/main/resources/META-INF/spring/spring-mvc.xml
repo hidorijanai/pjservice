@@ -95,6 +95,11 @@
         </constructor-arg>
     </bean>
 
+    <!-- 同一セッション内のリクエストの同期化 -->
+    <!--
+    <bean class="jp.co.smart.app.config.EnableSynchronizeOnSessionPostProcessor" />
+    -->
+
     <!-- ファイルアップロード -->
     <bean id="multipartResolver"
         class="org.springframework.web.multipart.support.StandardServletMultipartResolver">
@@ -124,6 +129,7 @@
                 <entry key="InvalidTransactionTokenException" value="common/error/transactionTokenError" />
                 <entry key=".DataAccessException" value="common/error/dataAccessError" />
                 <entry key="MultipartException" value="common/error/fileUploadError" />
+                <entry key="InvalidRequestException" value="common/error/operationError" />
             </map>
         </property>
         <property name="statusCodes">
@@ -133,6 +139,7 @@
                 <entry key="common/error/transactionTokenError" value="409" />
                 <entry key="common/error/dataAccessError" value="500" />
                 <entry key="common/error/fileUploadError" value="400" />
+                <entry key="common/error/operationError" value="400" />
             </map>
         </property>
         <property name="defaultErrorView" value="common/error/systemError" />
