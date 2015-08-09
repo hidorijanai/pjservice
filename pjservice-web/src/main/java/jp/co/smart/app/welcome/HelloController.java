@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.web.bind.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,8 +17,11 @@ import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import jp.co.smart.domain.model.UserInfo;
+import jp.co.smart.domain.service.userdetails.BaseUserDetails;
 
 /**
  * Handles requests for the application home page.
@@ -99,7 +103,7 @@ public class HelloController {
     	}
     	return "sample/hello2";
     }
-    
+
     @RequestMapping(value = "save", params = "complete", method = RequestMethod.GET)
     public String saveComplete(SessionStatus sessionStatus) {
     	sessionStatus.setComplete();
@@ -121,5 +125,12 @@ public class HelloController {
     @RequestMapping(value = "create", params = "form1")
     public String createForm1() {
     	return "wizard/form1";
+    }
+
+    @RequestMapping(method = RequestMethod.GET)
+    public String view(@AuthenticationPrincipal BaseUserDetails userDetails, Model model) {
+        UserInfo account = userDetails.getUserInfo();
+        model.addAttribute(account);
+        return "account/view";
     }
 }

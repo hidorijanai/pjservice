@@ -18,22 +18,21 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import jp.co.smart.domain.common.constants.DomainConstants;
 import jp.co.smart.domain.model.UserInfo;
-import jp.co.smart.domain.repository.userinfo.UserInfoSharedRepository;
+import jp.co.smart.domain.service.userinfo.UserInfoSharedService;
 
 public class BaseUserDetailsService implements UserDetailsService {
 
-    private static final Logger logger = LoggerFactory
-            .getLogger(BaseUserDetailsService.class);
+    private static final Logger logger = LoggerFactory.getLogger(BaseUserDetailsService.class);
 
     @Inject
-    UserInfoSharedRepository usreInfoRepository;
+    UserInfoSharedService userInfoSharedService;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
         logger.debug("Execute Method loadUserByUsername.");
 
-        UserInfo userInfo = usreInfoRepository.findOne(username);
+        UserInfo userInfo = userInfoSharedService.findOneById(username);
         if (userInfo == null) {
             throw new UsernameNotFoundException(username + " is not found."); // TODO to property file
         }

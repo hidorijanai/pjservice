@@ -22,7 +22,7 @@ public class BaseUserDetails extends User {
      */
     public BaseUserDetails(UserInfo userInfo, Collection<? extends GrantedAuthority> authorities) {
 
-        super(userInfo.getUserId(), userInfo.getPassword(), true, true, true, true, authorities);
+        super(userInfo.getUserId(), userInfo.getPassword(), authorities);
         this.userInfo = userInfo;
     }
 
