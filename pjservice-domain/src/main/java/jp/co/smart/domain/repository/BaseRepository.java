@@ -2,7 +2,6 @@ package jp.co.smart.domain.repository;
 
 import java.io.Serializable;
 import java.util.Collection;
-import java.util.List;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -28,9 +27,9 @@ public interface BaseRepository<T, ID extends Serializable> {
 
     public abstract boolean exists(ID paramID);
 
-    public abstract List<T> findAll();
+    public abstract Collection<T> findAll();
 
-    public abstract List<T> findAll(Collection<ID> paramIterable);
+    public abstract Collection<T> findAll(Collection<ID> paramIterable);
 
     public abstract long count();
 

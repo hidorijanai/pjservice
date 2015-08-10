@@ -127,7 +127,7 @@ public class HelloController {
     	return "wizard/form1";
     }
 
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(value = "view", method = RequestMethod.GET)
     public String view(@AuthenticationPrincipal BaseUserDetails userDetails, Model model) {
         UserInfo account = userDetails.getUserInfo();
         model.addAttribute(account);

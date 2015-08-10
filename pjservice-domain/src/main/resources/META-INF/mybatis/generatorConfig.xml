@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration >
+  <context id="context1" >
+    <!-- JDBCの接続　 -->
+    <jdbcConnection driverClass="org.postgresql.Driver"
+                    connectionURL="jdbc:postgresql://localhost/pjservice"
+                    userId="postgres"
+                    password="postgres" />
+
+    <!-- Modelの格納先 targetProjectはsrc\main\javaまでを指定（それ以降のディレクトリはtargetPackageにより自動生成される。）-->
+    <javaModelGenerator targetPackage="jp.co.smart.domain.model"
+                        targetProject="C:\LocalDriveE\GitHub\pjservice\pjservice-domain\src\main\java" />
+
+    <!-- sqlMap（XML）の格納先 -->
+    <sqlMapGenerator targetPackage="jp.co.smart.domain.repository"
+                     targetProject="C:\LocalDriveE\GitHub\pjservice\pjservice-domain\src\main\resources" />
+
+    <!--DAO（Mapper）の格納先-->
+    <javaClientGenerator targetPackage="jp.co.smart.domain.repository"
+                         targetProject="C:\LocalDriveE\GitHub\pjservice\pjservice-domain\src\main\java"
+                         type="XMLMAPPER" />
+
+    <table schema="postgres" tableName="T900_TODO" >
+        <!--
+        <columnOverride column="???" property="???" />
+        -->
+    </table>
+  </context>
+</generatorConfiguration>

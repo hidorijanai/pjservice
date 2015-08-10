@@ -8,16 +8,22 @@
 <head>
 <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<meta name="viewport" content="width=device-width" />
-<script type="text/javascript">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-</script>
+<link href="${pageContext.request.contextPath}/resources/app/css/vendor/bootstrap.min.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/resources/app/css/vendor/flat-ui.min.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/resources/app/css/styles.css" rel="stylesheet" >
+<!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+<!--[if lt IE 9]>
+  <script src="js/vendor/html5shiv.js"></script>
+  <script src="js/vendor/respond.min.js"></script>
+<![endif]-->
+
+<script type="text/javascript"></script>
 <c:set var="titleKey">
   <tiles:insertAttribute name="title" ignore="true" />
 </c:set>
 <title><spring:message code="${titleKey}" text="pjservice" /></title>
-<link rel="stylesheet"
-    href="${pageContext.request.contextPath}/resources/app/css/styles.css">
 </head>
 <body>
   <div class="container">
@@ -25,5 +31,9 @@
     <tiles:insertAttribute name="body" />
     <tiles:insertAttribute name="footer" />
   </div>
+  <script src="${pageContext.request.contextPath}/resources/app/js/vendor/jquery.min.js"></script>
+  <script src="${pageContext.request.contextPath}/resources/app/js/vendor/bootstrap.min.js"></script>
+  <script src="${pageContext.request.contextPath}/resources/app/js/vendor/flat-ui.min.js"></script>
+  <script src="${pageContext.request.contextPath}/resources/app/js/common.js"></script>
 </body>
 </html>
