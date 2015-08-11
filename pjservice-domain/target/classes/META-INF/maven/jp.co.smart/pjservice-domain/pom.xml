@@ -58,7 +58,11 @@
 <!--             <scope>provided</scope> -->
 <!--         </dependency> -->
         <!-- == End Database == -->
-
+        <dependency>
+            <groupId>org.mybatis.generator</groupId>
+            <artifactId>mybatis-generator-core</artifactId>
+            <scope>provided</scope>
+        </dependency>
         <!-- == Begin Unit Test == -->
         <dependency>
             <groupId>junit</groupId>

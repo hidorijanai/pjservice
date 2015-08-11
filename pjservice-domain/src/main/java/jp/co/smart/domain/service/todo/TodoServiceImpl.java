@@ -13,8 +13,9 @@ import org.terasoluna.gfw.common.message.ResultMessage;
 import org.terasoluna.gfw.common.message.ResultMessages;
 
 import jp.co.smart.domain.model.Todo;
-import jp.co.smart.domain.repository.todo.TodoRepository;
-import jp.co.smart.domain.repository.todo.TodoRepositoryImpl;
+import jp.co.smart.domain.model.TodoExample;
+import jp.co.smart.domain.model.TodoKey;
+import jp.co.smart.domain.repository.TodoMapper;
 
 @Service
 public class TodoServiceImpl implements TodoService {
@@ -24,16 +25,22 @@ public class TodoServiceImpl implements TodoService {
 	@Inject
 	JodaTimeDateFactory dateFactory;
 
-	TodoRepository todoRepository = new TodoRepositoryImpl();
+	@Inject
+	TodoMapper todoMapper;
 
 	@Override
 	public Collection<Todo> findAll() {
-		return todoRepository.findAll();
+		TodoExample example = new TodoExample();
+		return todoMapper.selectByExample(example);
 	}
 
 	@Override
 	public Todo create(Todo todo) {
-		long unfinishedCount = todoRepository.countByFinished(false);
+
+		TodoExample example = new TodoExample();
+		example.createCriteria().andFinishedEqualTo(false);
+		long unfinishedCount = todoMapper.countByExample(example);
+
 		if (unfinishedCount >= MAX_UNFINISHED_COUNT) {
 			ResultMessages messages = ResultMessages.error();
             messages.add(ResultMessage
@@ -49,7 +56,7 @@ public class TodoServiceImpl implements TodoService {
 		todo.setCreatedAt(createdAt);
 		todo.setFinished(false);
 
-		todoRepository.create(todo);
+		todoMapper.insert(todo);
 
 		return todo;
 	}
@@ -57,7 +64,7 @@ public class TodoServiceImpl implements TodoService {
 	@Override
 	public Todo finish(String todoId) {
 		Todo todo = findOne(todoId);
-		if (todo.isFinished()) {
+		if (todo.getFinished()) {
 			ResultMessages messages = ResultMessages.error();
 			messages.add(ResultMessage
                     .fromText("[E002] The requested Todo is already finished. (id=" + todoId + ")"));
@@ -65,19 +72,22 @@ public class TodoServiceImpl implements TodoService {
 		}
 
 		todo.setFinished(true);
-		todoRepository.update(todo);
+		todoMapper.updateByPrimaryKey(todo);
 
 		return todo;
 	}
 
 	@Override
 	public void delete(String todoId) {
-		todoRepository.delete(todoId);
+		Todo todo = findOne(todoId);
+		todoMapper.deleteByPrimaryKey(todo);
 	}
 
 	@Override
 	public Todo findOne(String todoId) {
-		Todo todo = todoRepository.findOne(todoId);
+		TodoKey todoKey = new TodoKey();
+		todoKey.setTodoId(todoId);
+		Todo todo = todoMapper.selectByPrimaryKey(todoKey);
 		if (todo == null) {
 			ResultMessages messages = ResultMessages.error();
 			messages.add(ResultMessage.fromText("[E404] The requested Todo is not found. (id=" + todoId + ")"));

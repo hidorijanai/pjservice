@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import org.terasoluna.gfw.common.exception.BusinessException;
 
 import jp.co.smart.domain.model.UserInfo;
-import jp.co.smart.domain.repository.userinfo.UserInfoRepository;
+import jp.co.smart.domain.repository.UserInfoMapper;
 
 @Service
 public class UserInfoSharedServiceImpl implements UserInfoSharedService {
@@ -16,12 +16,12 @@ public class UserInfoSharedServiceImpl implements UserInfoSharedService {
 	PasswordEncoder passwordEncoder;
 
 	@Inject
-	UserInfoRepository userInfoRepository;
+	UserInfoMapper userInfoMapper;
 
 	@Override
 	public UserInfo findOneById(String userId) {
 
-		UserInfo userInfo = userInfoRepository.findOne(userId);
+		UserInfo userInfo = userInfoMapper.findOne(userId);
 
 		if (userInfo == null) {
 			throw new BusinessException("user not found!");

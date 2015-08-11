@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
 <generatorConfiguration >
+
+  <!-- JDBCの格納場所を指定　日本語がパス内に入っているとうまく機能しない場合あり -->
+  <classPathEntry
+      location="C:/Users/bakuskjp/.m2/repository/org/postgresql/postgresql/9.4-1201-jdbc41/postgresql-9.4-1201-jdbc41.jar"/>
+
   <context id="context1" >
+
+    <plugin type="org.mybatis.generator.plugins.SerializablePlugin" />
+
     <!-- JDBCの接続　 -->
     <jdbcConnection driverClass="org.postgresql.Driver"
                     connectionURL="jdbc:postgresql://localhost/pjservice"
@@ -10,21 +18,29 @@
 
     <!-- Modelの格納先 targetProjectはsrc\main\javaまでを指定（それ以降のディレクトリはtargetPackageにより自動生成される。）-->
     <javaModelGenerator targetPackage="jp.co.smart.domain.model"
-                        targetProject="C:\LocalDriveE\GitHub\pjservice\pjservice-domain\src\main\java" />
+                        targetProject="pjservice-domain\src\main\java" />
 
     <!-- sqlMap（XML）の格納先 -->
     <sqlMapGenerator targetPackage="jp.co.smart.domain.repository"
-                     targetProject="C:\LocalDriveE\GitHub\pjservice\pjservice-domain\src\main\resources" />
+                     targetProject="pjservice-domain\src\main\resources" />
 
     <!--DAO（Mapper）の格納先-->
     <javaClientGenerator targetPackage="jp.co.smart.domain.repository"
-                         targetProject="C:\LocalDriveE\GitHub\pjservice\pjservice-domain\src\main\java"
+                         targetProject="pjservice-domain\src\main\java"
                          type="XMLMAPPER" />
 
-    <table schema="postgres" tableName="T900_TODO" >
-        <!--
-        <columnOverride column="???" property="???" />
-        -->
+    <table
+           tableName="todo"
+           enableInsert="true"
+           enableSelectByPrimaryKey="true"
+           enableSelectByExample="true"
+           enableUpdateByPrimaryKey="true"
+           enableUpdateByExample="true"
+           enableDeleteByPrimaryKey="true"
+           enableDeleteByExample="true"
+           enableCountByExample="true"
+           selectByExampleQueryId="true"
+           modelType="hierarchical">
     </table>
   </context>
 </generatorConfiguration>
