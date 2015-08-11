@@ -257,3 +257,7 @@ footer {
 .strike {
     text-decoration: line-through;
 }
+
+.nav-centered {
+	text-align: center;
+}

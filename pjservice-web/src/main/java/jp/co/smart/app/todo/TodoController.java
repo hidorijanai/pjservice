@@ -1,11 +1,12 @@
 package jp.co.smart.app.todo;
 
-import java.util.Collection;
-
 import javax.inject.Inject;
 import javax.validation.groups.Default;
 
 import org.dozer.Mapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -22,6 +23,7 @@ import jp.co.smart.app.todo.TodoForm.TodoCreate;
 import jp.co.smart.app.todo.TodoForm.TodoDelete;
 import jp.co.smart.app.todo.TodoForm.TodoFinish;
 import jp.co.smart.domain.model.Todo;
+import jp.co.smart.domain.model.TodoExample;
 import jp.co.smart.domain.service.todo.TodoService;
 
 @Controller
@@ -40,19 +42,29 @@ public class TodoController {
 		return form;
 	}
 
+/*
 	@RequestMapping(value = "list")
 	public String list(Model model) {
 		Collection<Todo> todoList = todoService.findAll();
 		model.addAttribute("todoList", todoList);
 		return "todo/list";
 	}
+*/
+	@RequestMapping(value = "list")
+	public String list(@PageableDefault(10) Pageable pageable, Model model) {
+		TodoExample example = new TodoExample();
+		Page<Todo> page = todoService.findPage(example, pageable);
+		model.addAttribute("page", page);
+		return "todo/list";
+	}
 
-	@RequestMapping(value = "create", method = RequestMethod.POST)
+	@RequestMapping(value = "list", method = RequestMethod.POST, params= "create")
 	public String create(@Validated({Default.class, TodoCreate.class}) TodoForm form,
-			BindingResult bingdingResult, Model model, RedirectAttributes attributes) {
+			BindingResult bingdingResult, @PageableDefault(10) Pageable pageable,
+			Model model, RedirectAttributes attributes) {
 
 		if (bingdingResult.hasErrors()) {
-			return list(model);
+			return list(pageable, model);
 		}
 		Todo todo = beanMapper.map(form, Todo.class);
 
@@ -60,7 +72,7 @@ public class TodoController {
             todoService.create(todo);
         } catch (BusinessException e) {
             model.addAttribute(e.getResultMessages());
-            return list(model);
+            return list(pageable, model);
         }
 
         ResultMessages messages = ResultMessages.success();
@@ -70,19 +82,20 @@ public class TodoController {
 		return "redirect:/todo/list";
 	}
 
-	@RequestMapping(value = "finish", method = RequestMethod.POST)
+	@RequestMapping(value = "list", method = RequestMethod.POST, params= "finish")
 	public String finish(@Validated({Default.class, TodoFinish.class}) TodoForm form,
-			BindingResult bindingResult, Model model, RedirectAttributes attributes) {
+			BindingResult bindingResult, @PageableDefault(10) Pageable pageable,
+			Model model, RedirectAttributes attributes) {
 
 		if (bindingResult.hasErrors()) {
-			return list(model);
+			return list(pageable, model);
 		}
 
 		try{
 			todoService.finish(form.getTodoId());
 		} catch (BusinessException e) {
 			model.addAttribute(e.getResultMessages());
-			return list(model);
+			return list(pageable, model);
 		}
 
 		ResultMessages messages = ResultMessages.success();
@@ -92,18 +105,19 @@ public class TodoController {
 		return "redirect:/todo/list";
 	}
 
-	@RequestMapping(value = "delete", method = RequestMethod.POST)
+	@RequestMapping(value = "list", method = RequestMethod.POST, params="delete")
 	public String delete(@Validated({Default.class, TodoDelete.class}) TodoForm form,
-			BindingResult bindingResult, Model model, RedirectAttributes attributes) {
+			BindingResult bindingResult, @PageableDefault(10) Pageable pageable,
+			Model model, RedirectAttributes attributes) {
 
 		if (bindingResult.hasErrors()) {
-			return list(model);
+			return list(pageable, model);
 		}
 		try{
 			todoService.delete(form.getTodoId());
 		} catch (BusinessException e) {
 			model.addAttribute(e.getResultMessages());
-			return list(model);
+			return list(pageable, model);
 		}
 		ResultMessages messages = ResultMessages.success();
 		messages.add(ResultMessage.fromText("Delete successfully!"));

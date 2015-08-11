@@ -1,11 +1,17 @@
 package jp.co.smart.domain.service.todo;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 import javax.inject.Inject;
 
+import org.apache.ibatis.session.RowBounds;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.terasoluna.gfw.common.date.jodatime.JodaTimeDateFactory;
 import org.terasoluna.gfw.common.exception.BusinessException;
@@ -94,6 +100,20 @@ public class TodoServiceImpl implements TodoService {
 			throw new BusinessException(messages);
 		}
 		return todo;
+	}
+
+	@Override
+	public Page<Todo> findPage(TodoExample example, Pageable pageable) {
+		long total = todoMapper.countByExample(example);
+		List<Todo> todoList = null;
+
+		if (0 < total) {
+			RowBounds rowBounds = new RowBounds(pageable.getOffset(), pageable.getPageSize());
+			todoList = todoMapper.findPageByExample(example, rowBounds);
+		} else {
+			todoList = Collections.emptyList();
+		}
+		return new PageImpl<Todo>(todoList, pageable, total);
 	}
 
 }

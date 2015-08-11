@@ -42,5 +42,6 @@
            selectByExampleQueryId="true"
            modelType="hierarchical">
     </table>
+
   </context>
 </generatorConfiguration>

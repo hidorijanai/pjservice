@@ -1,10 +1,13 @@
 package jp.co.smart.domain.repository;
 
 import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.session.RowBounds;
+
 import jp.co.smart.domain.model.Todo;
 import jp.co.smart.domain.model.TodoExample;
 import jp.co.smart.domain.model.TodoKey;
-import org.apache.ibatis.annotations.Param;
 
 public interface TodoMapper {
     /**
@@ -94,4 +97,12 @@ public interface TodoMapper {
      * @mbggenerated Tue Aug 11 15:23:41 JST 2015
      */
     int updateByPrimaryKey(Todo record);
+
+    /**
+     *
+     * @param example
+     * @param rowBounds
+     * @return
+     */
+    List<Todo> findPageByExample(TodoExample example, RowBounds rowBounds);
 }
