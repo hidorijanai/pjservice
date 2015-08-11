@@ -66,5 +66,8 @@
                   disabledHref="#"
                   enableLinkOfCurrentPage="false"/>
     </nav>
+
+    <input name="page" type="hidden" value="${page.number }" />
+    <input name="size" type="hidden" value="${page.size }" />
 </form:form>
 </div>

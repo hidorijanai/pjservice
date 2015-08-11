@@ -9,6 +9,7 @@
 <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="contextPath" content="${pageContext.request.contextPath}" />
 
 <link href="${pageContext.request.contextPath}/resources/app/css/bootstrap.min.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/resources/app/css/styles.css" rel="stylesheet">

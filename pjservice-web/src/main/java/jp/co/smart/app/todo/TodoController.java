@@ -53,6 +53,7 @@ public class TodoController {
 	@RequestMapping(value = "list")
 	public String list(@PageableDefault(10) Pageable pageable, Model model) {
 		TodoExample example = new TodoExample();
+		example.setOrderByClause("created_at DESC");
 		Page<Todo> page = todoService.findPage(example, pageable);
 		model.addAttribute("page", page);
 		return "todo/list";
