@@ -17,8 +17,8 @@
         <table class="table table-bordered table-hover">
             <thead>
                 <tr>
-                    <th width="80%">内容</th>
-                    <th width="20%">操作</th>
+                    <th width="70%">内容</th>
+                    <th width="30%">操作</th>
                 </tr>
             </thead>
             <tbody>
